@@ -1,14 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class GameViewer extends JFrame{
-    private Ball b;
     private Game game;
     private Player player;
+    private Image board;
 
-    public GameViewer(Ball b){
-        this.b = b;
+    public GameViewer(Game game){
         this.game = game;
-        this.player = player;
+        player = new Player();
 
         this.setSize(2000, 1000);
         this.setTitle("Window");
@@ -16,17 +16,8 @@ public class GameViewer extends JFrame{
         this.setVisible(true);
     }
 
-    int xPosition = ;
-    int yPosition = ;
-    int buttonWidth = 80;
-    int buttonHeight = 40;
 
-    for (int i = 0; i < 38; i++) {
-
-    }
-
-
-    public void paint(){
+    public void paint(Graphics g){
 
     }
 }

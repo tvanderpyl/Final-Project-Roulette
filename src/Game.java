@@ -1,34 +1,16 @@
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import javax.swing.*;
+import java.awt.*;
 
-public class Game implements MouseListener, MouseMotionListener {
+public class Game{
     private Player player;
-    private Ball ball;
-    private Board board;
     private GameViewer window;
 
     public Game(){
         this.player = new Player();
-        this.ball = new Ball(0, 0);
-        this.board = new Board();
-        this.window = new GameViewer(ball);
+        this.window = new GameViewer(this);
     }
 
-    public int spinWheel(){
-
-    }
-
-    public int select(){
-
-    }
-
-    public void placeBet(int betNumber) {
-        player.setBet(betNumber);
+    public static void main(String[] args) {
+        Game game = new Game();
     }
 }
-
-public static void main(String[] args) {
-    new Game();
-}
-
-
