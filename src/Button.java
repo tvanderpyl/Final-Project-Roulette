@@ -22,7 +22,7 @@ public class Button{
     }
 
     public boolean isClicked(int x, int y) {
-        if (x < this.x || y < this.y || y > this.y + height || x > this.x +width){
+        if (x < this.x || y < this.y || y > this.y + height || x > this.x + width){
             return false;
         }
         return true;

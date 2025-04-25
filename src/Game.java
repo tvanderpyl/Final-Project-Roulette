@@ -30,7 +30,7 @@ public class Game implements MouseListener{
             image = new ImageIcon("src/Images/sqaure" + (i * 2) + ".png").getImage();
             buttons.add(new Button(window, image, x, y, 40, 40));
             image = new ImageIcon("src/Images/sqaure" + ((i * 2)+ 1) + ".png").getImage();
-            buttons.add(new Button(window, image, x + 75, y, 40, 40));
+            buttons.add(new Button(window, image, x + 100, y, 40, 40));
             y += 43;
         }
 
@@ -46,7 +46,7 @@ public class Game implements MouseListener{
     public void addBet(int index){
         // get the bet
         player.editMoney(-(player.getBet()));
-        bets[index] = player.getBet();
+        bets[index] = bets[index] + player.getBet();
     }
 
     public int spin(){
@@ -64,9 +64,9 @@ public class Game implements MouseListener{
         }
         if (actualNumber >= 1 && actualNumber <= 36) {
             if (actualNumber % 2 == 0) {
-                player.editMoney(bets[38] * 2); // even bet
+                player.editMoney(bets[39] * 2);
             } else {
-                player.editMoney(bets[39] * 2); // odd bet
+                player.editMoney(bets[38] * 2);
             }
         }
         for (int i = 0; i < 40; i++){
@@ -82,6 +82,10 @@ public class Game implements MouseListener{
         return player.getMoney();
     }
 
+    public int getChoice(){
+        return choice;
+    }
+
     public static void main(String[] args) {
         Game game = new Game();
         game.run();
@@ -90,7 +94,7 @@ public class Game implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("x = " + e.getX() + ", y = " + e.getY());
-        for (int i = 0; i < 39; i++){
+        for (int i = 0; i < buttons.size()-1; i++){
             if (buttons.get(i).isClicked(e.getX(), e.getY())){
                 if (player.getMoney() < player.getBet()){
                     break;
@@ -102,7 +106,7 @@ public class Game implements MouseListener{
             }
         }
         if (buttons.get(40).isClicked(e.getX(), e.getY())){
-            choice = this.spin();
+            this.choice = this.spin();
             this.calculate(choice);
             System.out.println(player.getMoney());
             window.repaint();

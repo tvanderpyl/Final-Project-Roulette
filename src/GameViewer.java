@@ -40,5 +40,7 @@ public class GameViewer extends JFrame{
         Font font = new Font("Font", Font.BOLD, 28);
         g.setFont(font);
         g.drawString("Player Balance " + game.getMoney(), 700, 575);
+
+        g.drawString("" + game.getChoice(), 300, 450);
     }
 }
