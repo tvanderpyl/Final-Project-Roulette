@@ -9,13 +9,13 @@ public class GameViewer extends JFrame{
     public GameViewer(Game game){
         this.game = game;
         player = new Player();
+        game.setSpinning(false);
 
         this.setSize(1400, 900);
         this.setTitle("Window");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
 
     public void paint(Graphics g){
 
@@ -41,6 +41,43 @@ public class GameViewer extends JFrame{
         g.setFont(font);
         g.drawString("Player Balance " + game.getMoney(), 700, 575);
 
-        g.drawString("" + game.getChoice(), 300, 450);
+        int rate = 0;
+        if (game.getSpinning()){
+            while (rate < 4){
+                for (int i = 0; i < 19; i++){
+                    try {
+                        Thread.sleep(rate * 50);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    game.getWheel().get(i).draw(g);
+                }
+                rate += 1;
+                for (int i = 0; i < 19; i++){
+                    try {
+                        Thread.sleep(rate * 50);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    game.getWheel().get(i + 19).draw(g);
+                }
+                rate += 1;
+            }
+            for (int i = 0; i < 38; i++){
+                if (game.getWheel().get(i).getVal() == game.getChoice()){
+                    game.getWheel().get(i).draw(g);
+                    break;
+                }
+                try {
+                    Thread.sleep(rate * 50);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                game.getWheel().get(i).draw(g);
+            }
+        }
+        game.setSpinning(false);
+
+        g.drawString("" + game.getChoice(), 275, 450);
     }
 }

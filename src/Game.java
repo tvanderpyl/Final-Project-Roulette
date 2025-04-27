@@ -10,6 +10,8 @@ public class Game implements MouseListener{
     private int bets[] = new int[40];
     private ArrayList<Button> buttons = new ArrayList<Button>();
     private int choice;
+    private ArrayList<Wheel> wheel = new ArrayList<Wheel>();
+    private boolean spinning;
 
     public Game(){
         this.player = new Player();
@@ -19,7 +21,54 @@ public class Game implements MouseListener{
 
     public void run(){
         this.makeButtons();
+        this.makeWheel();
         window.repaint();
+    }
+
+    public void makeWheel(){
+        Image image;
+        for (int i = 0; i < 38; i++){
+            image = new ImageIcon("src/Images/Wheel" + (i + 1) + ".png").getImage();
+            wheel.add(new Wheel(image, window));
+        }
+        wheel.get(0).setVal(3);
+        wheel.get(1).setVal(15);
+        wheel.get(2).setVal(34);
+        wheel.get(3).setVal(22);
+        wheel.get(4).setVal(5);
+        wheel.get(5).setVal(17);
+        wheel.get(6).setVal(32);
+        wheel.get(7).setVal(20);
+        wheel.get(8).setVal(7);
+        wheel.get(9).setVal(11);
+        wheel.get(10).setVal(30);
+        wheel.get(11).setVal(26);
+        wheel.get(12).setVal(9);
+        wheel.get(13).setVal(28);
+        wheel.get(14).setVal(0);
+        wheel.get(15).setVal(2);
+        wheel.get(16).setVal(14);
+        wheel.get(17).setVal(35);
+        wheel.get(18).setVal(23);
+        wheel.get(19).setVal(4);
+        wheel.get(20).setVal(16);
+        wheel.get(21).setVal(33);
+        wheel.get(22).setVal(21);
+        wheel.get(23).setVal(6);
+        wheel.get(24).setVal(18);
+        wheel.get(25).setVal(31);
+        wheel.get(26).setVal(19);
+        wheel.get(27).setVal(8);
+        wheel.get(28).setVal(12);
+        wheel.get(29).setVal(29);
+        wheel.get(30).setVal(25);
+        wheel.get(31).setVal(10);
+        wheel.get(32).setVal(27);
+        wheel.get(33).setVal(00);
+        wheel.get(34).setVal(1);
+        wheel.get(35).setVal(13);
+        wheel.get(36).setVal(36);
+        wheel.get(37).setVal(24);
     }
 
     public void makeButtons(){
@@ -49,8 +98,20 @@ public class Game implements MouseListener{
         bets[index] = bets[index] + player.getBet();
     }
 
+    public void setSpinning(boolean bool){
+        this.spinning = bool;
+    }
+
+    public boolean getSpinning(){
+        return spinning;
+    }
+
     public int spin(){
-        return (int)(Math.random() * 38);
+        int choice = (int)(Math.random() * 38);
+        this.spinning = true;
+        window.repaint();
+
+        return choice;
     }
 
     public void calculate(int choice){
@@ -84,6 +145,10 @@ public class Game implements MouseListener{
 
     public int getChoice(){
         return choice;
+    }
+
+    public ArrayList<Wheel> getWheel(){
+        return wheel;
     }
 
     public static void main(String[] args) {
