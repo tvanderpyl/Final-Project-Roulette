@@ -36,10 +36,10 @@ public class GameViewer extends JFrame{
         button = game.getButtons().get(40);
         button.draw(g);
 
-        g.setColor(Color.BLACK);
-        Font font = new Font("Font", Font.BOLD, 28);
-        g.setFont(font);
-        g.drawString("Player Balance " + game.getMoney(), 700, 575);
+        button = game.getButtons().get(41);
+        button.draw(g);
+        button = game.getButtons().get(42);
+        button.draw(g);
 
         int rate = 0;
         if (game.getSpinning()){
@@ -64,7 +64,7 @@ public class GameViewer extends JFrame{
                 rate += 1;
             }
             for (int i = 0; i < 38; i++){
-                if (game.getWheel().get(i).getVal() == game.getChoice()){
+                if (game.getWheel().get(i).getVal() == game.getChoice() - 1){
                     game.getWheel().get(i).draw(g);
                     break;
                 }
@@ -78,6 +78,12 @@ public class GameViewer extends JFrame{
         }
         game.setSpinning(false);
 
-        g.drawString("" + game.getChoice(), 275, 450);
+        g.setColor(Color.BLACK);
+        Font font = new Font("Font", Font.BOLD, 28);
+        g.setFont(font);
+        g.drawString("Player Balance " + game.getMoney(), 700, 575);
+        g.drawString("Click on the buttons to bet. Click Spin to Spin", 10, 110);
+
+        // g.drawString("" + (game.getChoice() - 1), 275, 450);
     }
 }
